@@ -121,8 +121,20 @@ int main(int argc, char const *argv[]) {
     // free(p);
 
     // test2();
-    test_u2g_g2u();
+    // test_u2g_g2u();
 
+    // printf("sizeof(int) = %d\n",sizeof(int) );
+    // printf("sizeof(short) = %d\n",sizeof(short) );
+
+    int ass[5] = {1};
+    for (int i = 0; i < 5; ++i)
+    {
+        printf("%d ", ass[i]);
+    }
+
+    printf("\n");
+
+    printf("%6.3f\n",1.2f );
 
     printf("%s\n", "press any key to exit");
     getchar();

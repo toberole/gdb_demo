@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include <iconv.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
 
 
 void test() {
@@ -106,6 +109,28 @@ void test_u2g_g2u() {
     close(fd);
 }
 
+void test3(){
+    char pattern[] = { 'o', 'u', 'l', 'd','e'};
+
+    printf("sizeof = %d\n", sizeof(pattern));
+    printf("strlen = %d\n", strlen(pattern));
+}
+
+void test4(){
+    int fd = open("./test_fd.txt",O_RDWR);
+    int fd_c = dup(fd);
+    char buf[1] = {0};
+
+    read(fd,buf,1);
+    printf("fd read ch = %c\n", buf[0]);
+
+    read(fd_c,buf,1);
+    printf("fd_c read ch = %c\n", buf[0]);
+
+    close(fd);
+    close(fd_c);
+}
+
 
 int main(int argc, char const *argv[]) {
 
@@ -126,15 +151,18 @@ int main(int argc, char const *argv[]) {
     // printf("sizeof(int) = %d\n",sizeof(int) );
     // printf("sizeof(short) = %d\n",sizeof(short) );
 
-    int ass[5] = {1};
-    for (int i = 0; i < 5; ++i)
-    {
-        printf("%d ", ass[i]);
-    }
+    // int ass[5] = {1};
+    // for (int i = 0; i < 5; ++i)
+    // {
+    //     printf("%d ", ass[i]);
+    // }
 
-    printf("\n");
+    // printf("\n");
 
-    printf("%6.3f\n",1.2f );
+    // printf("%6.3f\n",1.2f );
+
+
+
 
     printf("%s\n", "press any key to exit");
     getchar();

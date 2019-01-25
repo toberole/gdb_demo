@@ -6,7 +6,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-
+#include <exception>
 
 
 void test() {
@@ -27,7 +27,7 @@ void add(int num, ...) {
     for (int i = 0; i < num; ++i) {
         // 按照int型解析可变参数
         int data = va_arg(v,
-        int);
+                          int);
 
         printf("data: %d\n", data);
     }
@@ -80,7 +80,7 @@ int code_convert(char *from_charset, char *to_charset, char *inbuf, size_t inlen
     if (iconv(cd, pin, &inlen, pout, &outlen) == -1)
         return -1;
     iconv_close(cd);
-    *pout = '\0';
+    *pout = NULL;
 
     return 0;
 }
@@ -109,30 +109,76 @@ void test_u2g_g2u() {
     close(fd);
 }
 
-void test3(){
-    char pattern[] = { 'o', 'u', 'l', 'd','e'};
+void test3() {
+    char pattern[] = {'o', 'u', 'l', 'd', 'e'};
 
     printf("sizeof = %d\n", sizeof(pattern));
     printf("strlen = %d\n", strlen(pattern));
 }
 
-void test4(){
-    int fd = open("./test_fd.txt",O_RDWR);
+void test4() {
+    int fd = open("./test_fd.txt", O_RDWR);
     int fd_c = dup(fd);
     char buf[1] = {0};
 
-    read(fd,buf,1);
+    read(fd, buf, 1);
     printf("fd read ch = %c\n", buf[0]);
 
-    read(fd_c,buf,1);
+    read(fd_c, buf, 1);
     printf("fd_c read ch = %c\n", buf[0]);
 
     close(fd);
     close(fd_c);
 }
 
+void test6() {
+    int i = 1 / 0;
+}
 
-int main(int argc, char const *argv[]) {
+void test5() {
+    try {
+        test6();
+    } catch (...) {
+        printf("error msg \n");
+    }
+
+    printf("%s\n", "发生了异常");
+}
+
+
+// 字符串的效率从高到低依次为：+=、append()、stringstream、sprintf()。
+void test7() {
+//    std::string strS;
+//    strS += "Hello ";
+//    strS += "World";
+//
+//    // printf("",str.c_)
+
+
+
+
+}
+
+void byteorder() {
+    union {
+        short value;
+        char union_bytes[sizeof(short)];
+    } test;
+
+    test.value = 0x0102;
+
+    if (test.union_bytes[0] == 1 && test.union_bytes[1] == 2) {
+        printf("big endian\n");
+    } else if (test.union_bytes[1] == 1 && test.union_bytes[0] == 2) {
+        printf("small endian\n");
+    } else{
+        printf("unknown ...\n");
+    }
+
+}
+
+
+int main1(int argc, char const *argv[]) {
 
     // test();
     // test();
@@ -162,6 +208,9 @@ int main(int argc, char const *argv[]) {
     // printf("%6.3f\n",1.2f );
 
 
+    // test5();
+
+    byteorder();
 
 
     printf("%s\n", "press any key to exit");

@@ -153,10 +153,6 @@ void test7() {
 //    strS += "World";
 //
 //    // printf("",str.c_)
-
-
-
-
 }
 
 void byteorder() {
@@ -176,6 +172,14 @@ void byteorder() {
     }
 
 }
+
+typedef struct stu
+{
+    int age;
+    char s;
+    int64_t i;
+    
+}Student;
 
 
 int main1(int argc, char const *argv[]) {
@@ -210,7 +214,9 @@ int main1(int argc, char const *argv[]) {
 
     // test5();
 
-    byteorder();
+    // byteorder();
+
+    printf("Student bytes = %d\n", sizeof(Student));
 
 
     printf("%s\n", "press any key to exit");

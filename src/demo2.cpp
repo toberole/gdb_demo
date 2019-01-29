@@ -82,16 +82,18 @@ int main(int argc, char const *argv[]) {
 
     std::cout << "=== main task === thread_id: " << std::this_thread::get_id() << std::endl;
 
-    io_service.reset();
-
-    io_service.run();
-    io_service.poll();
-
+    // io_service.reset();
     io_service.stop();
+    io_service.run();
+    //io_service.poll();
+
+    //io_service.stop();
 
 //    io_service.poll();
 //    std::cout << "------ io_service.poll() after ------" << std::endl;
 //    io_service.poll();
+
+    // boost::asio::steady_timer
 
     std::cout << "io_service.run() after" << std::endl;
 
